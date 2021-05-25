@@ -6,7 +6,7 @@ const Checkbox = ({ label, value, onChange }) => (
             type='checkbox'
             checked={value}
             onChange={onChange} />
-        <span>&nbsp;{label}</span>
+        <span>&nbsp;<b>{label}</b></span>
     </div>
 )
 

@@ -1,23 +1,17 @@
 import { combineReducers } from 'redux';
 
 import authReducer from './auth_reducer';
-// import pedidoReducer from './pedido_reducer';
-// import clienteReducer from './cliente_reducer';
-// import categoriaReducer from './categoria_reducer';
-// import produtoReducer from './produto_reducer';
-// import variacaoReducer from './variacao_reducer';
-// import avaliacaoReducer from './avaliacao_reducer';
-// import configuracaoReducer from './configuracao_reducer';
+import alunoReducer from './aluno_reducer';
+import funcionarioReducer from './funcionario_reducer';
+import chapaReducer from './chapa_reducer';
+import candidatoReducer from './candidato_reducer';
 
 const reducers = combineReducers({
   auth: authReducer,
-  // pedido: pedidoReducer,
-  // clientes: clienteReducer,
-  // categoria: categoriaReducer,
-  // produto: produtoReducer,
-  // variacao: variacaoReducer,
-  // avaliacao: avaliacaoReducer,
-  // configuracao: configuracaoReducer
+  alunos: alunoReducer,
+  funcionarios: funcionarioReducer,
+  chapas: chapaReducer,
+  candidatos: candidatoReducer,
 });
 
 export default reducers;

@@ -10,11 +10,11 @@ const noAuth = Component => {
     componentDidMount() {
       const { getUser, authorized, history, usuario } = this.props;
       getUser();
-      if (authorized && usuario.role.includes('adm')) history.replace('/');
+      if (authorized && usuario.role.includes('adm')) history.replace('/adm');
     }
     componentDidUpdate(prevProps) {
       const { authorized, history } = prevProps;
-      if (!authorized && this.props.authorized && this.props.usuario.role.includes('adm')) history.replace('/');
+      if (!authorized && this.props.authorized && this.props.usuario.role.includes('adm')) history.replace('/adm');
     }
 
     render() {

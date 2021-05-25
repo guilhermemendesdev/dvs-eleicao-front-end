@@ -77,7 +77,6 @@ export default function SpringModal({ titulo, descricao, onClick, onChange, inep
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(password)
   return (
     <div>
       <Modal

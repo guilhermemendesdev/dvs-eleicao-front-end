@@ -12,24 +12,6 @@ export const initApp = () => {
   const opcaoLembrar = localStorage.getItem("opcaoLembrar");
   if (opcaoLembrar === "false") cleanToken();
 }
-// export const criarSenha = ({ inep, password }, callback) => {
-//   const { password } = req.body;
-//   const usuario = new Usuario({ nome, email });
-//   usuario.setSenha(password);
-// }
-// store(req, res, next) {
-//   const { nome, email, password } = req.body;
-
-//   const usuario = new Usuario({ nome, email });
-//   usuario.setSenha(password);
-
-//   usuario.save()
-//     .then(() => res.json({ usuario: usuario.enviarAuthJSON() }))
-//     .catch((err) => {
-//       console.log(err);
-//       next(err);
-//     });
-// }
 
 // USUARIOS
 export const handleLogin = ({ inep, password, opcaoLembrar }, callback) => {
@@ -45,7 +27,7 @@ export const handleLogin = ({ inep, password, opcaoLembrar }, callback) => {
 
 export const getUser = () => {
   return function (dispatch) {
-    axios.get(`${api}/${versao}/api/usuarios/`, getHeaders())
+    axios.get(`${api}/api/${versao}/usuarios/`, getHeaders())
       .then((response) => {
         saveToken(response.data.usuario, true);
         dispatch({ type: LOGIN_USER, payload: response.data });
@@ -56,7 +38,7 @@ export const getUser = () => {
 
 export const updateUser = (dados, cb) => {
   return function (dispatch) {
-    axios.put(`${api}/${versao}/api/usuarios/`, dados, getHeaders())
+    axios.put(`${api}/api/${versao}/usuarios/`, dados, getHeaders())
       .then((response) => {
         saveToken(response.data.usuario, true);
         dispatch({ type: LOGIN_USER, payload: response.data });

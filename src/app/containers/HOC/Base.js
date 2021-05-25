@@ -1,5 +1,7 @@
 import React from 'react';
 import Base from '../Base';
+import { connect } from 'react-redux';
+import * as actions from '../../actions'
 
 const base = Component => {
   class ComponentBase extends React.Component {
@@ -27,6 +29,13 @@ const base = Component => {
       )
     }
   }
+
+  const mapStateToProps = state => ({
+    authorized: state.auth.authorized,
+    usuario: state.auth.usuario
+  });
+
+  return connect(mapStateToProps, actions)(ComponentBase)
 }
 
-
+export default base;

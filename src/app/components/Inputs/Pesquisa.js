@@ -4,8 +4,9 @@ const Pesquisa = ({ valor, onChange, placeholder, onClick }) => (
     <div className='Pesquisa flex horizontal'>
         <input value={valor} onChange={onChange} placeholder={placeholder} />
 
-        <button>
-            <i className='fas fa-search' onClick={onClick} />
+        <button onClick={onClick}>
+
+            <i style={{ color: 'black' }} className='fas fa-search' />
         </button>
 
     </div>

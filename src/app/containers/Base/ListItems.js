@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const items = [
-  { rota: '/', icone: (<i className="fas fa-copy" />), titulo: 'Pedidos' },
-  { rota: '/clientes', icone: (<i className="fas fa-users" />), titulo: 'Clientes' },
-  { rota: '/categorias', icone: (<i className="fas fa-clone" />), titulo: 'Categorias' },
-  { rota: '/produtos', icone: (<i className="fas fa-boxes" />), titulo: 'Produtos' },
-  { rota: '/configuracoes', icone: (<i className="fas fa-cog" />), titulo: 'Configurações' },
+  { rota: '/alunos', icone: (<i className="fas fa-users" />), titulo: 'Alunos' },
+  { rota: '/chapas', icone: (<i className="fas fa-clone" />), titulo: 'Chapas' },
+  { rota: '/candidatos', icone: (<i className="fas fa-clone" />), titulo: 'Candidatos' },
+  { rota: '/funcionarios', icone: (<i className="fas fa-boxes" />), titulo: 'Funcionários' },
+  { rota: '/votacao', icone: (<i className="fas fa-cog" />), titulo: 'Votação' },
   { rota: '/perfil', icone: (<i className="fas fa-user" />), titulo: 'Perfil' }
 ]
 

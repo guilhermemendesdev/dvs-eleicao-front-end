@@ -7,39 +7,28 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import base from './containers/HOC/Base';
 import noAuth from './containers/HOC/NoAuth';
 
-// import { initApp } from './actions'
+import { initApp } from './actions'
 
 // CONTAINER COM BASE
 import Home from './containers/Home'
 import Login from './containers/Login'
-// import Pedidos from './containers/Pedidos/';
-// import Pedido from './containers/Pedido/';
-// import Clientes from './containers/Clientes/';
-// import Cliente from './containers/Cliente/';
-
-// import Categorias from './containers/Categorias/';
-// import NovaCategorias from './containers/Categorias/novaCategoria';
-// import Categoria from './containers/Categoria/';
-
-// import Produtos from './containers/Produtos/';
-// import NovoProduto from './containers/Produtos/novoProduto'
-// import Produto from './containers/Produto/';
-
-// import Avaliacoes from './containers/Avaliacoes/';
-// import Avaliacao from './containers/Avaliacao/';
-
-// import Configuracoes from './containers/Configuracoes/';
-// import Perfil from './containers/Perfil/';
-
-// import Login from './containers/Login';
-// import RecuperarSenha from './containers/RecuperarSenha';
-// import ResetarSenha from './containers/RecuperarSenha/ResetarSenha';
+import IndexAdm from './containers/Adm'
+import Alunos from './containers/Alunos';
+import ShowAlunos from './containers/Alunos/show';
+import Funcionarios from './containers/Funcionarios';
+import ShowFuncionarios from './containers/Funcionarios/show';
+import Chapas from './containers/Chapas';
+import ShowChapas from './containers/Chapas/show';
+import NovaChapas from './containers/Chapas/store';
+import Candidatos from './containers/Candidatos';
+import ShowCandidatos from './containers/Candidatos/show';
+import NovoCandidatos from './containers/Candidatos/store';
 
 export default class App extends Component {
 
-  // componentDidMount() {
-  //   initApp();
-  // }
+  componentDidMount() {
+    initApp();
+  }
 
   render() {
     return (
@@ -48,6 +37,17 @@ export default class App extends Component {
           <div className="App">
             <Route path={'/'} exact component={noAuth(Home)} />
             <Route path={'/login'} exact component={noAuth(Login)} />
+            <Route path={'/adm'} exact component={base(IndexAdm)} />
+            <Route path={'/alunos'} exact component={base(Alunos)} />
+            <Route path={'/alunos/:id'} exact component={base(ShowAlunos)} />
+            <Route path={'/funcionarios'} exact component={base(Funcionarios)} />
+            <Route path={'/funcionarios/:id'} exact component={base(ShowFuncionarios)} />
+            <Route path={'/chapas'} exact component={base(Chapas)} />
+            <Route path={'/chapas/:id'} exact component={base(ShowChapas)} />
+            <Route path={'/chapas/store/adm'} exact component={base(NovaChapas)} />
+            <Route path={'/candidatos'} exact component={base(Candidatos)} />
+            <Route path={'/candidatos/:id'} exact component={base(ShowCandidatos)} />
+            <Route path={'/candidatos/store/adm'} exact component={base(NovoCandidatos)} />
             {/* <Route path={'/pedido/:id'} exact component={base(Pedido)} />
 
           <Route path={'/clientes'} exact component={base(Clientes)} />

@@ -42,7 +42,6 @@ class Login extends Component {
 
   render() {
     const { inep, password, opcaoLembrar, erros, registrarSenha } = this.state;
-    console.log(erros)
     return (
       <div>
         <legend className='card-header text-left legend-pma faq-btn-link'>Informe suas credenciais</legend>
