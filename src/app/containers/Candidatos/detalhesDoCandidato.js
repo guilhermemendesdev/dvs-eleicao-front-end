@@ -2,6 +2,7 @@ import React from 'react';
 import Titulo from '../../components/Texto/Titulo';
 import { TextoDados } from '../../components/Texto/Dados';
 import InputValor from '../../components/Inputs/InputValor';
+import BlocoImagens from '../../components/Imagens/Bloco';
 import Voltar from '../../components/Links/Voltar';
 import moment from 'moment'
 import { connect } from 'react-redux';
@@ -12,6 +13,7 @@ class DetalhesDoCandidato extends React.Component {
 
   generateStateCandidato = (props) => ({
     nome: props.candidato ? props.candidato.nome : '',
+    fotos: props.candidato ? props.candidato.foto : "",
   })
 
   constructor(props) {
@@ -49,16 +51,65 @@ class DetalhesDoCandidato extends React.Component {
     )
   }
 
+  onRemove = (id) => {
+    const { usuario, candidato } = this.props;
+    if (!usuario || !candidato) return null;
+    const fotos = candidato.foto.filter((foto, index) => index !== id);
+    console.log(candidato.foto)
+    if (window.confirm("Você deseja realmente remover essa imagem?")) {
+      this.props.removeCandidatoImagens(candidato.foto[0], candidato._id, usuario._id, (error) => {
+        this.setState({
+          aviso: {
+            status: !error,
+            msg: error ? error.message : "Foto do candidato removida com sucesso"
+          }
+        });
+      });
+    }
+  }
+
+
+  handleUploadFoto = (ev) => {
+    const { usuario, candidato } = this.props;
+
+    if (!usuario || !candidato) return null;
+
+    const data = new FormData();
+    data.append("file", ev.target.files[0]);
+
+    this.props.updateCandidatoImagens(data, candidato._id, usuario._id, (error) => {
+      this.setState({
+        aviso: {
+          status: !error,
+          msg: error ? error.message : "Fotos do candidato atualizadas com sucesso"
+        }
+      });
+    });
+  }
+
+
+  renderImagens() {
+    const { candidato } = this.props;
+    console.log(candidato)
+    return (
+      <div className="dados-de-imagens">
+        <BlocoImagens
+          imagens={(candidato ? candidato.foto : [])}
+          handleSubmit={this.handleUploadFoto}
+          onRemove={this.onRemove} />
+      </div>
+    )
+  }
+
+
   renderDetalhesCadastro() {
     const { candidato, history } = this.props.history;
-    console.log(candidato)
     return (
 
       <div className='flex horizontal'>
-        <div style={{ marginRight: '50px' }}>
-          <img src='http://localhost:3000/fotosCandidato/file-1621964774822.jpg' />
+        <div style={{ width: '50%' }} className="flex-1 flex vertical">
+          {this.renderImagens()}
         </div>
-
         <div className='Detalhes-do-Cadastro'>
           <TextoDados
             chave='Nome'
@@ -117,7 +168,8 @@ class DetalhesDoCandidato extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  usuario: state.auth.usuario
+  usuario: state.auth.usuario,
+  candidato: state.candidatos.candidato
 })
 
 export default connect(mapStateToProps, actions)(DetalhesDoCandidato)

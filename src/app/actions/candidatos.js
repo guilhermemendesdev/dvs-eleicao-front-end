@@ -28,40 +28,41 @@ export const getCandidato = (id, zona) => {
   }
 }
 
-export const salvarCandidatos = (chapa, zona, cb) => {
+export const salvarCandidatos = (candidato, zona, cb) => {
+  console.log(candidato)
   return function (dispatch) {
     axios.post(`${api}/api/${versao}/candidato?zona=${zona}`, {
-      nome: chapa.nome,
-      dt_nascimento: chapa.dt_nascimento,
-      cpf: chapa.cpf,
-      email: chapa.email,
-      rg: chapa.rg,
-      telefone: chapa.telefone,
-      cargo: chapa.cargo,
-      funcao: chapa.funcao,
-      graduacao: chapa.graduacao,
-      curso_graduacao: chapa.curso_graduacao,
-      pos_graduacao: chapa.pos_graduacao,
-      curso_pos_graduacao: chapa.curso_pos_graduacao,
-      mestrado: chapa.mestrado,
-      curso_mestrado: chapa.curso_mestrado,
-      doutorado: chapa.doutorado,
-      curso_doutorado: chapa.curso_doutorado,
-      curso_gestor: chapa.curso_gestor,
-      obs_curso_gestor: chapa.obs_curso_gestor,
-      outros_cursos: chapa.outros_cursos,
-      data_entrada_inst: chapa.data_entrada_inst,
-      data_entrada_docencia: chapa.data_entrada_docencia,
+      nome: candidato.nome,
+      dt_nascimento: candidato.dt_nascimento,
+      cpf: candidato.cpf,
+      email: candidato.email,
+      rg: candidato.rg,
+      telefone: candidato.telefone,
+      cargo: candidato.cargo,
+      funcao: candidato.funcao,
+      graduacao: candidato.graduacao,
+      curso_graduacao: candidato.curso_graduacao,
+      pos_graduacao: candidato.pos_graduacao,
+      curso_pos_graduacao: candidato.curso_pos_graduacao,
+      mestrado: candidato.mestrado,
+      curso_mestrado: candidato.curso_mestrado,
+      doutorado: candidato.doutorado,
+      curso_doutorado: candidato.curso_doutorado,
+      curso_gestor: candidato.curso_gestor,
+      obs_curso_gestor: candidato.obs_curso_gestor,
+      outros_cursos: candidato.outros_cursos,
+      data_entrada_inst: candidato.data_entrada_inst,
+      data_entrada_docencia: candidato.data_entrada_docencia,
       endereco: {
-        cep: chapa.cep,
-        rua: chapa.rua,
-        complemento: chapa.complemento,
-        cidade: chapa.cidade,
-        uf: chapa.uf,
-        bairro: chapa.bairro,
-        numero: chapa.numero
+        cep: candidato.cep,
+        rua: candidato.rua,
+        complemento: candidato.complemento,
+        cidade: candidato.cidade,
+        uf: candidato.uf,
+        bairro: candidato.bairro,
+        numero: candidato.numero
       },
-      chapa: chapa.chapa
+      chapa: candidato.chapa
     }, getHeaders())
       .then(response => {
         dispatch({ type: GET_CANDIDATOS, payload: response.data });
@@ -70,5 +71,31 @@ export const salvarCandidatos = (chapa, zona, cb) => {
       .catch(e => cb(errorHandling(e)))
   }
 }
+
+export const removeCandidatoImagens = (fotos, id, zona, cb) => {
+  console.log(fotos)
+  return function (dispatch) {
+    axios.put(`${api}/api/${versao}/candidato/${id}?zona=${zona}`, { foto: [] }, getHeaders())
+      .then(response => {
+        dispatch({ type: GET_CANDIDATO, payload: response.data });
+        console.log(response.data)
+        cb(null);
+      })
+      .catch(e => cb(errorHandling(e)));
+  }
+}
+
+export const updateCandidatoImagens = (data, id, zona, cb) => {
+  return function (dispatch) {
+    axios.put(`${api}/api/${versao}/candidato/images/${id}?zona=${zona}`, data, getHeaders())
+      .then(response => {
+        dispatch({ type: GET_CANDIDATO, payload: response.data });
+        cb(null);
+      })
+      .catch(e => cb(errorHandling(e)));
+  }
+}
+
+
 
 export const limparCandidato = () => ({ type: LIMPAR_CANDIDATO });

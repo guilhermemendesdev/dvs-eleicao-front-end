@@ -5,6 +5,7 @@ import { api } from '../../config';
 class BlocoImagem extends React.Component {
     render() {
         const { handleSubmit, imagens, onRemove } = this.props
+        console.log(imagens)
         return (
             <div className="Bloco-Imagem">
                 <div className="flex horizontal">
@@ -20,7 +21,9 @@ class BlocoImagem extends React.Component {
                         imagens.map((src, idx) => (
                             <div
                                 className="imagem-container flex flex-center"
-                                style={{ backgroundImage: `url("${api}/public/img/${src}")` }}
+                                style={{
+                                    backgroundImage: `url("http://localhost:3000/fotosCandidato/${src}")`
+                                }}
                                 key={idx} >
                                 <div className="imagem-remover flex flex-center" onClick={() => onRemove(idx)}>
                                     <span className='teste'>{"x"}</span>
