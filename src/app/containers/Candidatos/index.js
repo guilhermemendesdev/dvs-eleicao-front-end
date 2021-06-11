@@ -17,14 +17,13 @@ class Candidatos extends Component {
     limit: 15
   }
 
-  getCandidatos() {
+  async getCandidatos() {
     const { atual, limit } = this.state;
     const { usuario } = this.props;
 
     if (!usuario) return null;
     const zona = usuario._id
-
-    this.props.getCandidatos(zona, atual, limit);
+    await this.props.getCandidatos(zona, atual, limit);
   }
 
   componentDidMount() {
@@ -33,7 +32,7 @@ class Candidatos extends Component {
 
     if (!usuario) return null;
     const zona = usuario._id
-    this.props.getCandidatos(zona, atual, limit);
+    this.getCandidatos(zona, atual, limit);
   }
 
   componentDidUpdate(prevProps) {
@@ -61,8 +60,9 @@ class Candidatos extends Component {
     const { pesquisa } = this.state;
     const { candidatos } = this.props;
     const dados = [];
+    console.log(this.props.candidatos);
 
-    (candidatos ? candidatos.docs : []).forEach((item) => {
+    (candidatos ? candidatos : []).forEach((item) => {
       dados.push({
         'Nome': item ? item.nome : '',
         'CPF': item ? item.cpf : '',
@@ -70,7 +70,9 @@ class Candidatos extends Component {
         'Cargo': item ? item.cargo : '',
         'botaoDetalhes': `/candidatos/${item._id}`
       })
+
     });
+
     return (
       <div className="Candidatos full-width">
         <div className='Card'>
@@ -88,7 +90,7 @@ class Candidatos extends Component {
             dados={dados} />
           <Paginacao
             atual={this.state.atual}
-            total={this.props.candidatos ? this.props.candidatos.total : 0}
+            total={this.props.candidatos === undefined ? 0 : this.props.candidatos.total}
             limite={this.state.limit}
             onClick={(numeroAtual) => this.changeNumeroAtual(numeroAtual)} />
         </div>
