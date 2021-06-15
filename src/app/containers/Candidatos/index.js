@@ -60,9 +60,8 @@ class Candidatos extends Component {
     const { pesquisa } = this.state;
     const { candidatos } = this.props;
     const dados = [];
-    console.log(this.props.candidatos);
 
-    (candidatos ? candidatos : []).forEach((item) => {
+    (candidatos ? candidatos.docs : []).forEach((item) => {
       dados.push({
         'Nome': item ? item.nome : '',
         'CPF': item ? item.cpf : '',
@@ -90,7 +89,7 @@ class Candidatos extends Component {
             dados={dados} />
           <Paginacao
             atual={this.state.atual}
-            total={this.props.candidatos === undefined ? 0 : this.props.candidatos.total}
+            total={this.props.candidatos ? this.props.candidatos.total : 0}
             limite={this.state.limit}
             onClick={(numeroAtual) => this.changeNumeroAtual(numeroAtual)} />
         </div>

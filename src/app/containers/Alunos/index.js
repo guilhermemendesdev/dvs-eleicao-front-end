@@ -70,6 +70,7 @@ class Alunos extends Component {
         'botaoDetalhes': `/alunos/${item._id}`
       })
     });
+    console.log(this.props.alunos);
     return (
       <div className="Alunos full-width">
         <div className='Card'>

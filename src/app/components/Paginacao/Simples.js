@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Paginacao = ({ total, atual, limite, onClick }) => {
+    console.log(total)
     const numeroPaginas = Math.ceil(total / limite);
     return (
         <div className='Paginacao flex horizontal'>

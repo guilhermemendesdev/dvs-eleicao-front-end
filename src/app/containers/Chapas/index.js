@@ -61,7 +61,9 @@ class Chapas extends Component {
     const { pesquisa } = this.state;
     const { chapas } = this.props;
     const dados = [];
-    (chapas ? chapas.docs : []).forEach((item) => {
+    console.log(this.props);
+
+    (chapas ? chapas : []).forEach((item) => {
       dados.push({
         'Nome': item ? item.nome : '',
         'Número': item ? item.numero : '',

@@ -22,7 +22,7 @@ class BlocoImagem extends React.Component {
                             <div
                                 className="imagem-container flex flex-center"
                                 style={{
-                                    backgroundImage: `url("http://localhost:3000/fotosCandidato/${src}")`
+                                    backgroundImage: `url("http://api.anapolis.go.gov.br/apiSed/fotosCandidato/${src}")`
                                 }}
                                 key={idx} >
                                 <div className="imagem-remover flex flex-center" onClick={() => onRemove(idx)}>
